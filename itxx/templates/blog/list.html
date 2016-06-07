@@ -11,7 +11,7 @@
         <table>
       		{% for paper in ptitle %}
                 <tr><td>{{paper.createtime|date:"m/d/Y H:i"}}</td>
-                  <td><div align=left><a href='/blog/content/{{paper.id}}'>{{ paper }}</a></div></td>
+                  <td><div align=left><a href='/blog/index/{{paper.id}}'>{{ paper }}</a></div></td>
     
                   {% endfor %}</tr>
       </table>

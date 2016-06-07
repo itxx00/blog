@@ -24,8 +24,8 @@ else:
     MYSQL_PORT = sae.const.MYSQL_PORT
 
 
-#DEBUG = True
-DEBUG = False
+DEBUG = True
+#DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -152,11 +152,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     #'django.contrib.staticfiles',
-    'itxx.search',
-    'itxx.sedb',
     'itxx.blog',
-    'itxx.cloudvm',
-    'itxx.DREAD',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

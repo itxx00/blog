@@ -1,71 +1,72 @@
 {% extends "blog/base.html" %}
 {% block content %}
 <!--{%if paper%}-->
-<div class="post">
-	<h2 class="storytitle"><a href='/blog/content/{{paper.id}}'>{{paper.title}}</a><br/>
-	<div class="meta">create time:{{paper.createtime|date:"m/d/Y H:i"}}</div>
-	</h2>
-	<div class="storycontent">{{paper.content|safe}}</div>
+<div style="float: right; margin: 30px 15px 15px 0px;">Category:<a href="/blog/list/{{papertype.id}}">{{papertype.typename}}</a></div>
+<div class="post_full">
+    <article>
+    <header>
+	<time class="published" datetime="{{paper.createtime|date:"Y-m-d H:i"}}">{{paper.createtime|date:"b d, Y"|upper}}</time>
+    <h2 class="entry-title"><a href='/blog/index/{{paper.id}}'>{{paper.title}}</a></h2>
+    </header>
+    
+	<div class="entry-summary">
+ 
+    {{paper.content|safe}}
+ 
+    </div>
+
         <div class="feedback"><a href="javascript:void(0)" id="{{paper.id}}" class="addComment">留言({{comment}})</a></div>
 	<br/>
   <div id="commentDiv_{{paper.id}}"></div>
+</article>
+    <footer></footer>
 </div>
-<!--{%endif%}-->
-<div id="pagination" class="post">
-    <a id='next_id' href="/blog/index/{{prevpaper.id}}" >较早一篇: {{prevpaper.title}}</a>
-</div>
-<script type="text/javascript">
 
+
+<!--{%endif%}-->
+<div id="pagination" class="post_full">
+    <div class="alignleft">
+        {%if nextpaper%}
+        <a href="/blog/index/{{nextpaper.id}}" >&laquo; {{nextpaper.title}}</a>
+        {%endif%}
+    </div>
+    <div class="alignright">
+    {%if prevpaper%}
+    	<a href="/blog/index/{{prevpaper.id}}" >{{prevpaper.title}}&raquo;</a>
+    {%endif%}
+    </div>
+</div>
+
+<script type="text/javascript">
 $(function(){
-    $("#pagination a").live("click", function(){
-    	$(this).addClass("loading").text("loading...");
-        var that = $(this);
-        $.ajax({
-		type: "GET",
-		url: $(this).attr("href") + "#timeline",
-		success: function(data){
-            		that.parent().remove();
-               		result = $(data).find("#timeline .post");
-                	nextHref = $(data).find("#pagination a").attr("href");
-			$(function() {
-				$("#timeline").append(result.fadeIn(300));
-				$("img").lazyload({
-					effect : "fadeIn"
-				});
-			});
-            $("#pagination a").removeClass("loading").text($("#next_id").text());
-			$("#pagination a").attr("href", nextHref);
-                
-            	}
-        });
-        return false;
-    });
-  
-    $(".addComment").live("click",function(){
-    	var that = $(this).addClass("loading").text("loading...");
-    	var id = $(this).attr("id");
-      	$("#commentDiv_"+id).load("/blog/comments/"+id,null,function(){
-        	that.remove();
-        	$("#submitBtn_"+id).click(function(){
-				var dataForm = $("#dataForm_"+id);
+        $(".addComment").live("click",function(){
+    	        var that = $(this).addClass("loading").text("loading...");
+    	        var id = $(this).attr("id");
+      	        $("#commentDiv_"+id).load("/blog/comments/"+id,null,function(){
+        	            that.remove();
+        	            $("#submitBtn_"+id).click(function(){
+				                var dataForm = $("#dataForm_"+id);
                                 var loadBtn = $(this).addClass("loading").val("submiting...").attr("disabled","disabled");
-				$.post(dataForm.attr("action"),dataForm.serializeArray(),function(re){
-                                	var error = $("#error_"+id);
-					if(re["state"] == "success"){
-                                          if(!$("#ol_"+id +">li")[0]){
-					  	$("#ol_"+id).empty();	
-                                          }
-                                          $("#ol_"+id).append("<li><p>"+re["time"]+",&nbsp;&nbsp;"+$("#nikename_"+id).val()+"&nbsp;:</p><p>"+$("#comment_"+id).val()+"</p></li>");
-					  dataForm[0].reset();
-                                          error.empty();
-					}else{
-						error.html(re["time"]);
-					}
-                                  loadBtn.removeClass("loading").val("Add").removeAttr("disabled");
-				},"json");
-         	 });
-      	});
-    });
- });
+				                $.post(dataForm.attr("action"),dataForm.serializeArray(),function(re){
+                                        var error = $("#error_"+id);
+                                        if(re["cmt_post_state"] == "success"){
+                                                if(!$("#ol_"+id +">li")[0]){
+					  	                                $("#ol_"+id).empty();
+                                                }
+                                                $("#ol_"+id).append("<li><p>"+re["time"]+",&nbsp;&nbsp;"+$("#nikename_"+id).val()+"&nbsp;:</p><p>"+$("#comment_"+id).val()+"</p></li>");
+					                            dataForm[0].reset();
+                                                error.empty();
+					                    }else{
+						                        error.html(re["time"]);
+					                    }
+                                        loadBtn.removeClass("loading").val("Add").removeAttr("disabled");
+				                },"json");
+         	             });
+      	        });
+        });
+});
 </script>
+
+
+
 {% endblock %}

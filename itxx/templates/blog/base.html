@@ -8,6 +8,7 @@
     <title>{{sitetitle}}</title>
     <style type="text/css">body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,宋体;}</style>
     <link href='/media/css/blog.css' type='text/css' rel='stylesheet'/>
+    <link rel="stylesheet" href="/media/css/main.min.css">
     <link href='/media/syntaxhighlighter/styles/shCore.css' type='text/css' rel='stylesheet'/>
     <link href='/media/syntaxhighlighter/styles/shCoreDefault.css' type='text/css' rel='stylesheet'/>
     <!--<script type='text/javascript' src='/media/js/prettify.js?ver=20110329'></script>-->
@@ -15,36 +16,90 @@
     <script type='text/javascript' src='/media/js/jquery-ui.min.js?ver=3.3.2'></script>
     <script type="text/javascript" src='/media/js/lazyload.js'></script>
     <script type="text/javascript" src="/media/syntaxhighlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="/media/syntaxhighlighter/scripts/shAutoloader.js"></script>
     <script type="text/javascript" src="/media/syntaxhighlighter/scripts/shBrushBash.js"></script>
     <script type="text/javascript" src="/media/syntaxhighlighter/scripts/shBrushPython.js"></script>
     <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">SyntaxHighlighter.all();</script>
 </head>
-<body>
-  <div id="wrapper">
-    <div id="header">
-          <span class="blogname"><wb:follow-button uid="1651522692" type="red_3" width="100%" height="24" ></wb:follow-button>
-          </span>
-    </div>
-          <table id="main">
-          <tr><td class="content" id="timeline">
-          {% block content %}
-          {% endblock %}            
-  
-          </td></tr>
-          </table><br>
-      <div id="footer">
-      Younstar----Do man, be thickroad!||
-            分类:{%for typename in papertype%}
-            <a href='/blog/list/{{typename.id}}'>[<font color=green>{{ typename }}</font>]</a>{%endfor%}||页面:
-            <a href="/dread" target="_blank" title="dread">[DREAD]</a>
-           <p>&copy;2012-2013 Younstar's Blog/All licensed under the<a href='http://www.gnu.org/copyleft/fdl.html' target='_blank'> GNU Free Document License.</a>
-           <a href='http://sae.sina.com.cn/' target='_blank'><img src='http://static.sae.sina.com.cn/image/poweredby/117X12px.gif' alt='powered by sinaapp' width='117' height='12'/>Powered.</a></p>
-           <br>
-           
-      </div>
+<body class="home blog">
+    <!--[if lt IE 7]><div class="alert">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+<div id="wrap">
+    <header class="navbar navbar-static-top navbar-inner navbar-fixed-top" role="banner">
+    <div class="container">
+        <a href="/blog" title="Homepage"><div class="brand logo"><img src="http://www.gravatar.com/avatar/{{avatar}}?&s=70"></div></a>
+         
+         
+        
+        <div class="navbar-header">
+
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+
+        <nav class="collapse navbar-collapse" role="navigation">
+          <ul class="nav pull-right">
+
+            <li><a href="/blog" title="Homepage">Home</a></li>
+            <li class="active"><a class="active" href="http://itxx.sinaapp.com/blog">Blog</a></li>
      
-  </div>
+              <li><a href="https://github.com/itxx00" target="_blank" title="Open Source">My Github</a></li>
+          </ul>
+        </nav>
+        
+    </div>
+    </header>   
+        
+    <div class="wrap container" role="document">
+        
+        <div class="content row">
+            
+          <div class="main col-sm-8" role="main" id="timeline">    
+       
+             {% block content %}
+             {% endblock %}      
+            
+          </div>
+            
+           <aside class="sidebar col-sm-4" role="complementary">
+               <section class="widget categories-2 widget_categories"><div class="widget-inner"><h3>Categories</h3>		<ul>
+                   {%for type in typelist%}
+                   <li class="cat-item cat-item-170"><a href="/blog/list/{{type.id}}" title="{{type}}">{{type}}</a></li>{%endfor%}
+                   </ul>
+                   </div>
+               </section>
+          </aside>
+            
+        </div>
+    </div>
+        
+</div>      
+
+<div id="footer" class="pagefooter">
+    <div class="footer-landscape">
+        <div class="footer-landscape-image">
+            <!-- footer -->
+            <div class="container">
+                <div class="row footer">
+                    <div class="col-md-8 col-sm-8 tbox">
+                        <div class="social links">
+                            <a title="itxx00 on GitHub" class="github" href="https://github.com/itxx00">GitHub</a>
+                            <a title="My Twitter" class="twitter" href="https://twitter.com/c0ak">Twitter</a>
+                            <a title="My Linkedin" class="linkedin" href="https://www.linkedin.com/pub/%E6%B0%B8%E4%BC%9F-%E9%AB%98/93/196/3b9">Twitter</a>
+                        </div>
+                      &copy;2012-2015 Younstar's Blog/All licensed under the<a href='http://www.gnu.org/copyleft/fdl.html' target='_blank'> GNU Free Document License.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+</div>
+  
+
 
   <div id="returntop">Top</div>
   <script type="text/javascript">
