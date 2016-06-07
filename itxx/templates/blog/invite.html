@@ -1,0 +1,21 @@
+{% extends "blog/base.html" %}
+  {% block content %}
+<br />
+	 
+          <div id="content">
+           <div id=papertitle>Invite Codes</div>
+           <div id=papercontent>
+1.各种蛋疼原因导致西农开源社区只开放邀请注册<br />
+2.关闭游客阅读内容的权限<br />
+3.论坛内有关版块已被有关部门和谐（你们懂的）<br />
+4.今后会不定期发放邀请码，有需要注册的还望珍惜<br />
+5.也可联系星星索取邀请码<a href=mailto:itxx00@gmail.com?subject=申请：西农开源社区邀请码&body=我因以下目的特申请西农开源社区邀请码一枚：>itxx00[at]gmail.com</a><br />
+6.威......武..................<br /><br />
+             ------2012-08-26-------<br/>
+	  {%for ivcode in ivcodes%} 
+	  {{ivcode}}
+            <br />
+{%endfor%}</div>
+</div>
+    
+      {% endblock %}

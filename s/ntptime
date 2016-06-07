@@ -1,0 +1,99 @@
+#!/bin/bash
+# setup ntp to update time.
+get_os_type() {
+  if grep -qi "red hat" /etc/issue; then
+    os_release="redhat"
+  elif grep -qi "centos" /etc/issue; then
+    os_release="centos" 
+  elif grep -qi "ubuntu" /etc/issue; then
+    os_release="ubuntu"
+  elif grep -qi "debian" /etc/issue; then
+    os_release="debian"
+  else
+    os_release=""
+  fi
+  echo $os_release
+}
+ 
+config_time_zone() {
+  echo "config time zone..."
+  /bin/rm -f /etc/localtime
+  ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+  if [ "$os_type" == "redhat" -o "$os_type" == "centos" ]; then
+      echo -e "ZONE=\"Asia/Shanghai\"" >/etc/sysconfig/clock
+  fi
+}
+ 
+install_ntp() {
+  case "$os_type" in
+    redhat|centos)
+      if ! rpm -q ntp &>>/dev/null; then
+        if ! yum -y install ntp; then
+          echo "install ntp failed" && rm -rf $LOCKfile && exit 1
+        fi
+      fi
+      ;;
+    debian|ubuntu)
+      if ! dpkg -s ntp &>>/dev/null; then
+        if ! apt-get install ntp ntpdate -y; then
+          echo "install ntp failed" && rm -rf $LOCKfile && exit 1
+        fi
+      fi
+      ;;
+  esac
+}
+ 
+mod_config_file()
+{
+  if [ "$os_type" == "redhat" -o "$os_type" == "centos" ]; then
+     if ! grep -q "ntp.api.bz" /etc/ntp/step-tickers; then
+       echo -e "ntp.api.bz\n0.asia.pool.ntp.org" >>/etc/ntp/step-tickers
+     fi
+  fi
+  if ! grep -q "ntp.api.bz" /etc/ntp.conf; then
+    echo -e "server ntp.api.bz prefer\nserver 0.asia.pool.ntp.org" >>/etc/ntp.conf
+  fi
+}
+ 
+# check lock
+LOCKfile=/tmp/.update_time_lock
+[ -f "$LOCKfile" ] && echo "locked." && exit 1
+touch $LOCKfile
+ 
+# check uid
+[ $UID -ne 0 ] && echo "must be root" &&
+  rm -rf $LOCKfile && exit 1
+ 
+os_type=$(get_os_type)
+[ "X$os_type" == "X" ] && echo "cannot get os type" &&
+  rm -rf $LOCKfile && exit 1
+echo "OS Type: $os_type"
+ 
+config_time_zone
+ 
+echo "install ntp..."
+install_ntp
+ 
+echo "config ntp..."
+mod_config_file
+ 
+echo "update time..."
+ntpdate -u ntp.api.bz
+ntpdate -u 210.72.145.44
+ 
+case $os_type in
+  "redhat"|"centos")
+    echo "start ntp service..."
+    service ntpd restart
+    echo "enable ntp on startup..."
+    chkconfig ntpd on
+    ;;
+  "ubuntu"|"debian")
+    echo "start ntp service..."
+    service ntp restart
+    echo "enable ntp on startp..."
+    update-rc.d -f ntp defaults
+    ;;
+esac
+ 
+rm -rf $LOCKfile

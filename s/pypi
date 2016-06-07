@@ -1,0 +1,11 @@
+#!/bin/sh
+[ -d ~/.pip ] || mkdir ~/.pip
+cat >~/.pip/pip.conf<<EOF
+[global]
+index-url = http://mirrors.aliyun.com/pypi/simple/
+EOF
+cat >~/.pydistutils.cfg<<EOF
+[easy_install]
+index_url = http://mirrors.aliyun.com/pypi/simple/
+EOF
+echo done!

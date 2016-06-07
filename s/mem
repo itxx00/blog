@@ -1,0 +1,15 @@
+#!/bin/bash
+for p in \
+	httpd \
+    haproxy \
+    nginx \
+    java \
+    pure-ftpd \
+    mysqld \
+    hhvm \
+    php-fpm \
+    php-cgi; do
+    m=$(ps -p "`pidof $p`" -o rsz= 2>/dev/null |
+    awk '{ sum += $1 }; END { print sum/1024.0 }')
+    printf "%-9s : %-8sM\n" $p $m
+done

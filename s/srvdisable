@@ -1,0 +1,9 @@
+#!/bin/sh
+for svc in \
+fcoe ip6tables iscsi iscsid lldpad \
+netfs nfs nfslock rpcbind rpcgssd rpcidmapd \
+rpcsvcgssd; do
+chkconfig $svc off >/dev/null 2>&1
+service  $svc stop >/dev/null 2>&1
+done
+echo "done."

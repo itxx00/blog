@@ -1,0 +1,48 @@
+
+{% block content %}
+
+
+<div class="comments-post">
+	<div id="comments">
+		<h3>-Comments-</h3>
+		{%if cmts%}
+        	<ol id="ol_{{paper.id}}">
+  		{%for cmt in cmts%}
+        	<li>
+          	<p>{{cmt.cmttime|date:"m/d/Y H:i"}},&nbsp;&nbsp;{{cmt.nikename}}&nbsp;:</p>
+  		<p>{{cmt.comment}}</p>
+{% if request.user.is_authenticated %}<p><form method="post"><textarea class="dashed" name="reply">{%if cmt.reply%}{{cmt.reply}}{%endif%}</textarea><input type="submit" value="REPLY"></form></p>
+                {%else%}{%if cmt.reply%}<div id=cmtreply>&nbsp;&nbsp;Reply:{{cmt.reply}}</div>{%endif%}{% endif %}
+  		</li>
+  		{%endfor%}
+        	</ol>
+          {%else%}<ol id="ol_{{paper.id}}">no comment...^ ^ </ol>{%endif%}
+                
+		<h3>-Leave a comment-</h3>
+        	
+        	<font id='error_{{paper.id}}' color='red'></font><a name='comments'></a>
+        	
+  		<a name='lstcmt'></a>
+  		<table>
+        		<form id="dataForm_{{paper.id}}" action="/blog/content/{{paper.id}}#comments" method="post">
+                	<p>
+          			<input  class="dashed" type="email" name="email" maxlength="32" value="{%if guestemail%}{{guestemail}}{%endif%}" tabindex="1">
+                  		Email
+  				<font color='red'>*</font>
+                	</p>
+  			<p>
+          			<input class="dashed" id="nikename_{{paper.id}}" type="text" name="nikename" maxlength="32" value="{%if postname%}{{postname}}{%endif%}" tabindex="2">
+                		Name
+  				<font color='red'>*</font><br />
+                	</p>
+                	<p>
+          			<textarea  class="dashed" id="comment_{{paper.id}}" name="comment" cols="60" rows="4" tabindex="3" style="margin: 0px; width: 598px; height: 90px;"></textarea>
+          			{%if success%}<script>alert('success！');window.location.href='/blog/content/{{paper.id}}';</script>{%endif%}<br />
+                	</p>
+                	<p><input type="button" id="submitBtn_{{paper.id}}" tabindex="4" value='Add'></p>
+			</form>
+     		</table>
+	</div>
+</div>
+<br />
+{% endblock %}

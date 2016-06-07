@@ -1,0 +1,19 @@
+{% extends "search/base.html" %}
+{% block content %}
+ <table>
+<tr>
+<td>
+<strong>{{ hashmd5 }}</strong>
+</td>
+<td>
+{% if password %}
+    
+   <strong><font color="#a0e0a0">{{ password }}</font></strong>
+    
+{% else %}
+<font color=red size=-1>不好意思,木有找到.</font>
+{% endif %}
+</td>
+</tr>
+ </table>
+{% endblock %}

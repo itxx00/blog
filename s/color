@@ -1,0 +1,4 @@
+#!/bin/sh
+for _ in {0..255}; do
+    printf "\x1b[38;5;${_}mcolour${_}\n"
+done | less -r

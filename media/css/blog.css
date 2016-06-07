@@ -1,0 +1,452 @@
+/* 
+Author: Guido W. Stiehle
+Author URI: http://www.easywebtutorials.com/
+*/
+
+
+
+body {
+        /*background:#333 url(http://res2.windows.microsoft.com/resbox/en/Windows%207/main/869eb807-c143-43c2-8e14-12f78fbd34a5_5.jpg) no-repeat fixed;*/
+        background:#333 fixed;
+  	font-family: Verdana, Tahoma, sans-serif;
+  	font-size: 12px;
+  	color: #000000;
+  	margin: 10px;
+  	padding: 0;
+}
+#wrapper {
+  	width: 65%;
+  	margin: 0 auto;
+ 	border: 1px;
+ 	padding: 0;
+}
+
+
+/* - - -   HEADER STYLES  - - - */
+
+
+#header {
+        background: black;
+        width:100%;
+	z-index:1;
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	overflow:visible;
+}
+
+#header p {
+	margin: 15px 30px;
+	padding: 5px;
+}
+
+.blogname {
+	font-family: Verdana, Tahoma, sans-serif;
+	font-size: 13px;
+	color: #666666;
+}
+
+.blogslogan {
+	font-family: Verdana, Tahoma, sans-serif;
+	font-size: 1px;
+	color: #B4B4B4	;
+}
+
+
+/* - -  Hyperlinks inside Header - - */
+
+
+#header a:link, #header a:active, #header a:visited {
+	color: #B4B4B4;
+	text-decoration: none;
+}
+
+#header a:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+#header a img {
+	border: none
+}
+
+
+/* - - - - - - - - - - - - - - -
+	GENERAL TEXT STYLES 
+   - - - - - - - - - - - - - - - */
+
+/* - - Hyperlinks - - */
+
+a:link	{ 
+	text-decoration: none;
+	color: #0000FF;
+}
+
+a:active { 
+	text-decoration: none; 
+	color: #0000CC; 
+}
+
+a:visited { 
+	text-decoration: none; 
+	color: #0000FF;
+}
+
+a:hover { 
+	text-decoration: none; 
+	color: #0066FF; 
+}
+
+a img {
+	border: none;
+}
+
+/* - -  Headings  - - */
+
+
+h1 {
+  	font-size: 20px;
+  	font-family: Verdana, Tahoma, sans-serif;
+  	color: #333333;
+  	margin: 5px 0;
+  	padding: 0;
+}
+
+h2 {
+  	font-size: 14px;
+  	font-family: Verdana, Tahoma, sans-serif;
+  	color: #666666;	
+  	margin: 5px 0;
+  	padding: 0;
+}
+
+h3 {
+  	font-size: 16px;
+  	font-family: Verdana, Tahoma, sans-serif;
+  	color: #666666;
+  	margin: 5px 0;
+  	padding: 0;
+}
+
+h4 {
+	font-size: 14px;
+	font-family: Verdana, Tahoma, sans-serif;
+	color: #000000;
+	margin: 3px 0;
+  	padding: 0;
+}
+
+
+/* - -  Paragraphs and List Items - - */
+
+
+p, li, {
+	font-size: 100%;
+	font-family: Verdana, Tahoma, sans-serif;
+	color: #000000;
+}
+
+
+
+
+/* - - - - - - - - - - - - - - - - - -
+	MAIN TABLE STYLES
+   - - - - - - - - - - - - - - - - - -
+
+/* - -  The Table - - */
+
+#main {
+	border-collapse: collapse;
+	width: 100%;
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+
+/* - - - -  The CONTENT Table Data Cell - - - - */
+
+.content {
+	background: whiteSmoke;
+        /*--opacity: 0.8;z-index:100; --*/
+  	vertical-align: top;
+  	padding: 10px;
+  	margin: 0;
+}
+
+
+/* - -  Everything inside the Content Table Cell - - */
+
+.content p {
+word-wrap:break-word;
+}
+
+.post, .comments-post {
+	clear:both;
+	margin-top: 5px;
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+.storytitle {
+	margin-top: 10px;
+	margin-bottom: 2px;
+        font-size: 36px;
+}
+
+.storytitle a:link, .storytitle a:active, .storytitle a:visited {
+	color: #666666;
+	text-decoration: none;
+}
+
+.storytitle a:hover {
+	color: #999999;
+	text-decoration: none;
+}
+
+.meta {
+	font-size: 12px;
+	padding-bottom: 10px;
+	border-bottom: #000000 1px;
+
+}
+
+.meta li, ul.post-meta li {
+	display: inline;
+}
+
+.meta ul {
+	display: inline;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.meta, .meta a {
+	color: #000000;
+	font-weight: normal;
+	letter-spacing: 0;
+}
+
+
+.storycontent {
+	background: whitesmoke;
+}
+
+.storycontent p {
+	word-wrap:break-word;
+}
+
+.feedback {
+	text-align: right;
+	clear: both;
+	margin-right: 30px;
+	font-size: 16px;
+}
+
+
+
+.codes {
+	display:block;
+	background-color: rgb(204, 204, 204); width: 560px;
+	word-wrap:break-word;
+	padding: 0.5em;
+	border: 1px solid #CCC;
+	overflow:hidden;
+}
+
+ul.post-meta {
+	list-style: none;
+}
+
+ul.post-meta span.post-meta-key {
+	font-weight: bold;
+}
+
+
+/* - -  The Comments - - */
+
+#comments h3 {
+	font-size: 14px;
+	font-family: Verdana, Tahoma, sans-serif;
+	color: #666666;
+}
+
+#comments p {
+word-wrap:break-word;
+}
+
+
+
+#commentlist li ul {
+	border-left: 1px;
+	font-size: 100%;
+	list-style-type: none;
+}
+
+
+/* - -  The Comment Form - - */
+
+#commentform  #comment{
+  width: 95%;
+  height: 90px;
+  background-color:#FFFFFF;
+  margin:0;
+}
+
+#commentform textarea {
+	width: 100%;
+}
+
+
+/* - - - - - - - - - - - - - - - - 
+	SIDEBAR STYLES
+   - - - - - - - - - - - - - - - - */
+
+.menu {
+  	width: 200px;
+  	vertical-align: top;
+  	background: #E9E9E9;
+  	border-left: 1px;
+  	padding: 0;
+}
+
+
+.nav {
+  	padding: 0;
+        overflow:hidden;
+}
+
+
+/* - - Subheadings - - */
+
+.nav h2, .nav h3, .nav h4 { 
+	color:#000000;
+	font-size: 14px;
+	margin: 10px 5px 5px 0;
+	padding-bottom: 2px;
+        text-decoration: none;
+}
+
+
+/* - - List Styles - - */
+
+.nav ul {
+	color: #000000;
+	list-style-type: none;
+	margin: 0;
+	padding: 5px 10px;
+	text-transform: none;
+        overflow:hidden;
+}	
+  
+.nav ul ul {
+	font-weight: normal;
+	line-height: 100%;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+}
+
+
+/* - - List Items (Text) - - */
+
+.nav ul ul li {
+	border: 0;
+	font-size: 12px;
+	line-height: 18px;
+	margin-bottom: 3px;
+	padding: 0;
+        overflow:hidden;
+}
+
+
+/* - - Sidebar Hyperlinks - - */
+
+.nav ul ul li a:link, .nav ul ul li a:active {
+	color: #0000FF;
+	text-decoration: none;
+}
+
+.nav ul ul li a:visited {
+	text-decoration: none; 
+	color: #0000FF;
+}
+
+.nav ul ul li a:hover {
+        color: #0066FF;
+	text-decoration: none;
+        text-shadow:0 0 5px #000;
+	-webkit-transition:color .1s ease;
+}
+
+
+.flasher{
+	width:100%;
+	border-bottom:1px solid #666;
+	box-shadow:-1px 0 10px #666;
+	margin-left:-100%;
+}
+.nav a:hover+div{
+	margin-left:100%;
+	-webkit-transition:margin-left .2s ease;
+}
+
+/* - - - - - - - - - - - - - - - - 
+	FOOTER STYLES
+   - - - - - - - - - - - - - - - - */
+
+#footer {
+  	border-top: 1px;
+  	margin-bottom: 0;
+  	background: gainsboro;
+  	text-align: center;
+  	padding: 2px;
+}
+
+#footer p {
+  	margin: 3px;
+  	padding: 1px;
+}
+
+.credit {
+  	font-size: 11px;
+  	color: #666666;
+  	text-align: right;
+  	margin-bottom: 0;
+}
+
+.credit a {
+	color: #666666;
+	text-decoration: none;
+}
+
+
+.navigation {
+	display: block;
+	margin-top: 10px;
+	margin-bottom: 30px;
+	}
+.alignright {
+	float: right;
+	}
+
+.alignleft {
+	float: left
+	}
+.content-right {
+	float: right;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+
+
+#pagination{padding:5px;text-align:center;border:1px;background:#EBEBEB;margin-top:10px;}
+#pagination .loading{padding-left:24px;background:url("/media/img/more_loading.gif") no-repeat 0px 4px;}#pagination a{text-decoration:none;}
+#pagination .loading:hover{background-color:transparent;cursor:default;}
+
+#returntop {border:0px solid;color:#06a;position:fixed;_position:absolute;line-height:30px;text-align:center;top:0px;left:0px;display:none;cursor:pointer;font-weight:bold}

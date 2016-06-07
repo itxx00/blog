@@ -1,0 +1,43 @@
+#!/bin/bash
+
+if [ -x /opt/MegaRAID/MegaCli/MegaCli64 ]; then
+    MegaCli=/opt/MegaRAID/MegaCli/MegaCli64
+elif [ -x /opt/MegaRAID/MegaCli/MegaCli ]; then
+    MegaCli=/opt/MegaRAID/MegaCli/MegaCli
+elif [ -x /usr/sbin/MegaCli ]; then
+    MegaCli=/usr/sbin/MegaCli
+elif [ -x $(which MegaCli) ]; then
+    MegaCli=$(which MegaCli)
+else
+	echo "cannot find MegaCli,package megacli not installed."
+    echo "you can download MegaCli from: http://www.lsi.com/support/pages/download-search.aspx"
+    exit
+fi
+
+#$MegaCli -LDInfo -Lall -aALL
+#$MegaCli -PDList -aALL
+
+Battery=$($MegaCli -AdpBbuCmd -GetBbuStatus -aALL|grep "Charger Status"|awk -F: '{print $1":"$2}')
+raid=$($MegaCli -cfgdsply -aALL|grep "RAID Level"|tail -1|awk -F: '{print $1"        :"$2}')
+Disknum=$($MegaCli  -cfgdsply -aALL|grep  -c  "Non Coerced Size")
+Onlinedisk=$($MegaCli -cfgdsply -aALL | grep "Online" | wc -l | sed 's/       //')
+Faileddisk=$($MegaCli -AdpAllInfo -aALL | grep "Failed Disks"|awk -F' ' '{print $4}')
+
+echo "===================== Raid  Information ====================="
+case "$raid" in
+    "RAID Level                  : Primary-1, Secondary-0, RAID Level Qualifier-0") echo "Raid Level        :Raid 1";;
+    "RAID Level                  : Primary-0, Secondary-0, RAID Level Qualifier-0") echo "Raid Level        :Raid 0";;
+    "RAID Level                  : Primary-5, Secondary-0, RAID Level Qualifier-3") echo "Raid Level        :Raid 5";;
+    "RAID Level                  : Primary-1, Secondary-3, RAID Level Qualifier-0") echo "Raid Level        :Raid 10";;
+    "RAID Level                  : Primary-1, Secondary-3, RAID Level Qualifier-0") echo "Raid Level        :Raid 10";;
+    *) echo "Raid Level        :$raid";;
+esac
+echo "Total  Diak Number:$Disknum"
+echo "Online Disk Number:$Onlinedisk"
+echo  "Failed Disk Number:$Faileddisk"
+
+if [ -z "$Battery" ]; then
+    echo "Battery           :Null"
+else
+    echo "Battery           :$Battery"
+fi

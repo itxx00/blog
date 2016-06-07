@@ -1,0 +1,12 @@
+{% extends "blog/base.html" %}
+  {% block content %}
+<br />
+<div id="content">
+            <div id=papertitle>Links</div> 
+            <div id=papercontent>
+	  {%for link in links%} 
+	  <a href={{link.linkaddr}} target='_blank'>{{link.linkname}}</a><br />
+              {%endfor%}</div>
+</div>
+    
+      {% endblock %}

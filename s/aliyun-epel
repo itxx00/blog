@@ -1,0 +1,4 @@
+#!/bin/sh
+mv /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel.repo.backup >/dev/null 2>&1
+mv /etc/yum.repos.d/epel-testing.repo /etc/yum.repos.d/epel-testing.repo.backup >/dev/null 2>&1
+wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-6.repo

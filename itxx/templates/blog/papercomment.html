@@ -1,0 +1,43 @@
+{% block content %}
+<div class="comments-post">
+	<div id="comments">
+		<h3>-Comments-</h3>
+		{%if cmts%}
+        	<ol id="ol_{{paper.id}}">
+  		{%for cmt in cmts%}
+        	<li>
+          	<p>{{cmt.cmttime|date:"m/d/Y H:i"}},&nbsp;&nbsp;{{cmt.nikename}}&nbsp;:</p>
+  		<p>{{cmt.comment}}</p>
+{% if request.user.is_authenticated %}<p><form method="post"><textarea class="dashed" name="reply">{%if cmt.reply%}{{cmt.reply}}{%endif%}</textarea><input type="submit" value="REPLY"></form></p>
+                {%else%}{%if cmt.reply%}<div id=cmtreply>&nbsp;&nbsp;Reply:{{cmt.reply}}</div>{%endif%}{% endif %}
+  		</li>
+  		{%endfor%}
+        	</ol>
+          {%else%}<ol id="ol_{{paper.id}}">no comment...^ ^ </ol>{%endif%}
+                
+		<h3>-Leave a comment-</h3>
+        	
+        	<font id='error_{{paper.id}}' color='red'></font><a name='comments'></a>
+        	
+  		<a name='lstcmt'></a>
+        		<form id="dataForm_{{paper.id}}" action="/blog/comments/{{paper.id}}" method="post">
+                        <p>
+                            <label for="email">Email</label><font color='red'>*</font><br>
+          		    <input  class="dashed" type="email" name="email" maxlength="32" value="{%if guestemail%}{{guestemail}}{%endif%}" tabindex="1">	
+                	</p>
+                        <p>
+                            <label for="author">Name</label><font color='red'>*</font><br>
+          		    <input class="dashed" id="nikename_{{paper.id}}" type="text" name="nikename" maxlength="32" value="{%if postname%}{{postname}}{%endif%}" tabindex="2">	
+                	</p>
+                	<p>
+                            <label for="comment">Comment</label><font color='red'>*</font><br>
+          		    <textarea  class="dashed" id="comment_{{paper.id}}" name="comment" cols="60" rows="4" tabindex="3" style="margin: 0px; width: 598px; height: 90px;"></textarea>
+                	</p>
+                        <p>
+                	    <input type="button" id="submitBtn_{{paper.id}}" tabindex="4" value='Add'>
+                        </p>
+			</form>
+	 </div>
+</div>
+<br />
+{% endblock %}

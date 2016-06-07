@@ -1,0 +1,19 @@
+
+{% block content %}
+
+<div class="post">
+	<h2 class="storytitle"><a href='/blog/content/{{paper1.id}}'>{{paper1.title}}</a><br/>
+	<div class="meta">create time:{{paper1.createtime|date:"m/d/Y H:i"}}</div>
+	</h2>
+	<div class="storycontent">{{paper1.content|safe}}</div>
+        <div class="feedback"><a href="javascript:void(0)" id="{{paper1.id}}" class="addComment">提问请轻击，评论请猛击({{comment1}})</a></div>
+	<br/>
+  <div id="commentDiv_{{paper1.id}}"></div>
+</div>
+{%endif%}
+<div id="pagination" class="post">
+  <a href="/blog/page/{{page_old}}" >下一篇</a>
+</div>
+<script type="text/javascript">
+
+{% endblock %}

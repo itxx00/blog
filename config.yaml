@@ -1,0 +1,18 @@
+name: itxx
+version: 2
+handle:
+- compress: if ( out_header["Content-type"] ~ "text/css" ) compress
+- compress: if ( out_header["Content-type"] ~ "text/javascript" ) compress
+- compress: if ( out_header["Content-type"] ~ "image/jpeg" ) compress
+- compress: if ( out_header["Content-type"] ~ "image/png" ) compress
+- compress: if ( out_header["Content-type"] ~ "image/pjpeg" ) compress
+- compress: if ( out_header["Content-type"] ~ "image/gif" ) compress
+- compress: if ( out_header["Content-type"] ~ "image/bmp" ) compress
+- expire: if( path ~ "favicon.ico" ) time 6000
+- expire: if( path ~ "/blog" ) time 6000
+- expire: if( path ~ "/favicon.ico" ) time 3000
+- expire: if( path ~ "*.jpg" ) time 30000
+- expire: if( path ~* \.(jpg|html) ) time 200
+- errordoc: 50000 /common.conf
+- mime: if( path ~ "\.mp3$") type "image/png"
+- mime: if( path ~ "\.mp3$") type "image/jpeg"

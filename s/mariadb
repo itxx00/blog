@@ -1,0 +1,10 @@
+#!/bin/bash
+echo '[mariadb]' >/etc/yum.repos.d/mariadb.repo
+echo 'name = MariaDB' >>/etc/yum.repos.d/mariadb.repo
+if [[ $(uname -i) = 'x86_64' ]]; then
+    echo 'baseurl = http://yum.mariadb.org/5.5/centos6-amd64/' >>/etc/yum.repos.d/mariadb.repo
+else
+    echo 'baseurl = http://yum.mariadb.org/5.5/centos6-x86/' >>/etc/yum.repos.d/mariadb.repo
+fi
+echo 'gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB' >>/etc/yum.repos.d/mariadb.repo
+echo 'gpgcheck=1' >>/etc/yum.repos.d/mariadb.repo

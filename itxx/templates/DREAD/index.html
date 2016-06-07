@@ -1,0 +1,23 @@
+<html>
+  <head>
+  <style type="text/css">
+    body,table,input,textarea,select {font-family:微软雅黑,Verdana,sans-serif,宋体;}  
+  </style>
+  <title>
+  Customized DREAD Model
+    </title>
+  </head>
+  <body>
+    <form method="post" action="">
+        {{ form.as_p }}
+        <input type="submit" value="计算风险">
+      <p>{%if result%}<font size=+2>{{result}}
+      {%if rate == 'low'%}<font color='green'>低危</font>{%endif%}
+      {%if rate == 'mid'%}<font color='yellow'>中危</font>{%endif%}
+      {%if rate == 'high'%}<font color='red'>高危</font>{%endif%}
+      
+        </font>
+      {%endif%}</p>
+    </form>
+  </body>
+</html>

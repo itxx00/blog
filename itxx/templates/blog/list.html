@@ -1,0 +1,29 @@
+{% extends "blog/base.html" %}
+  {% block content %}
+<br />
+<div id="content">
+    <div id=papertitle>{{ typename }}</div>
+    <div id=papercontent>
+    {%if joker%}
+    好基友，你到底在找神马呢？
+    {%else%}  
+    	{%if ptitle%}
+        <table>
+      		{% for paper in ptitle %}
+                <tr><td>{{paper.createtime|date:"m/d/Y H:i"}}</td>
+                  <td><div align=left><a href='/blog/content/{{paper.id}}'>{{ paper }}</a></div></td>
+    
+                  {% endfor %}</tr>
+      </table>
+  </div>
+</div>
+{%if ptold%}<a href=/blog/list/{{ptype}}/{{ptold}}>Front Page</a> {%endif%}
+
+      <a href=/blog/list/{{ptype}}/{{ptnew}}>Next Page</a> 
+         
+	{%else%}
+No more......</div>
+             <a href=/blog/list/{{ptype}}/{{ptold}}>Front Page</a> 
+	{%endif%}
+      {%endif%}
+      {% endblock %}

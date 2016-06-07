@@ -1,0 +1,9 @@
+cat >/etc/yum.repos.d/mariadb10.repo <<EOF
+[mariadb]
+name = MariaDB
+#baseurl = http://yum.mariadb.org/10.0/centos7-amd64
+#gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+baseurl = http://mirrors.aliyun.com/mariadb/yum/10.0/centos7-amd64
+gpgkey = http://mirrors.aliyun.com/mariadb/yum/RPM-GPG-KEY-MariaDB
+gpgcheck=1
+EOF

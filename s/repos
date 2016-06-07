@@ -1,0 +1,87 @@
+#!/bin/sh
+# Repos install script for CentOS 6
+# Bugs plz contact: @世纪东方内个星星
+
+# Input validation function 
+# check_input <msg> <valid responses regex> <default>
+# if <default> is passed on as null, then there is no default
+# Example: check_input  "Some question (yes/no) " "yes|no"  "yes"
+check_input() {
+  message=$1
+  validate=$2
+  default=$3
+
+  while [ $? -ne 1 ]; do
+    echo -n "$message "
+    read INPUTTEXT < /dev/tty
+    if [ "$INPUTTEXT" == "" -a "$default" != "" ]; then
+      INPUTTEXT=$default
+      return 1
+    fi
+    echo $INPUTTEXT | egrep -q "$validate" && return 1
+    echo "Invalid input"
+  done
+
+}
+
+dltool() {
+  local host="itxx.sinaapp.com"
+  local uri=$1
+
+  if type wget >/dev/null 2>&1; then
+    wget -q -O - $host/$uri
+  elif type curl >/dev/null 2>&1; then
+    curl -s $host/$uri
+  else
+    exec 5<>/dev/tcp/$host/80 && echo -e "GET /$uri HTTP/1.1\nHost: $host\n" >&5 && grep -rv $'\r'<&5
+  fi
+}
+
+echo "avaliable repos:
+1. epel       (By Fedora community, extra packages for EL)
+2. repoforge  (By community, new RPMforge)
+3. elrepo     (By community, focuses on hardware related packages)
+4. atomic     (By Atomicorp, focuses on web hosting)
+5. ius        (By Rackspace, focuses on web hosting)
+6. rpmfusion  (By community, provides nonfree software)
+7. aliyun pypi (Aliyun pypi mirror)
+8. aliyun centos (aliyun CentOS repo)
+9. aliyun epel
+"
+check_input "input repo number to install: " "1|2|3|4|5|6|7|8|9"
+query=$INPUTTEXT
+
+case "$query" in
+    1)
+        uri="sh/epel"
+        ;;
+    2)
+        uri="sh/repoforge"
+        ;;
+    3)
+        uri="sh/elrepo"
+        ;;
+    4)
+        uri="sh/atomic"
+        ;;
+    5)
+        uri="sh/ius"
+        ;;
+    6)
+        uri="sh/rpmfusion"
+        ;;
+    7)
+        uri="sh/pypi"
+        ;;
+    8)
+        uri="sh/aliyun-centos"
+        ;;
+    9)
+        uri="sh/aliyun-epel"
+        ;;
+    *)
+        echo "quit."
+        exit
+        ;;
+esac
+dltool $uri|sh

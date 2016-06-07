@@ -1,0 +1,37 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<p><a href='/blog/list/{{paper.papertype_id}}'>{{typename}}</a></p>
+<div class="post">
+	<h2 class="storytitle">{{paper.title}}</h2>
+  	<div class="meta">
+        	Create time:{{paper.createtime|date:"m/d/Y H:i"}}&nbsp;&nbsp;
+  		{%if paper.degree%}degree:{{paper.degree}}{%else%}first time{%endif%}&nbsp;&nbsp;
+ 		comments:<a href='{{paper.id}}#comments'>{{cmtnumber}}</a>
+	</div>
+	<br/>
+	<div class="storycontent">{{paper.content|safe}}</div>
+	<div class="meta"><br>原创内容，如需转载，保留署名</div>
+</div>   
+
+{%if not errors%}<a name='comments'></a>{%endif%}
+<br/>
+
+<div class="navigation">
+	{%if pnew%}
+      		<div class="alignleft">&laquo; 
+        	<a href='/blog/content/{{pnew.id}}'>{{pnew.title}}</a>
+                </div>
+      	{%else%}
+		No more......
+    	{%endif%}
+
+      	{%if pold%}
+      		<div class="alignright">
+        	<a href='/blog/content/{{pold.id}}'>{{pold.title}}</a>
+            	&raquo;
+                </div>
+      	{%else%}
+		No more......
+      	{%endif%}
+</div>
+{% endblock %}

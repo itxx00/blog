@@ -1,0 +1,26 @@
+<html>
+<head>
+   <title>MD5查询v1.0</title>
+</head>
+<body>
+ <table>
+  <form action="" method="post">
+    <input type="text" name="p" maxlength="32" style="width:400px;height:30px;color:#a0e0a0;" value="" >
+    <input type="submit" value="加密">
+  </form>
+ </table>
+ <table>
+  <form action="" method="post">
+    <textarea  name="q" style="resize:none;width:400px;height:200px;color:#e0a0e0" onfocus="if(this.value=='最多十个,每个一行.'){this.value='';}" onblur="if(this.value==''){this.value='最多十个,每个一行.'}">最多十个,每个一行.</textarea>
+    <input type="submit" value="解密">
+  </form>
+ </table>
+  {% if error %}
+    <p style="color:red;">输入有误,仔细检查.</p>
+  {% endif %}
+  {% if toomany %}
+    <p style="color:red;">数量太多,压力很大.</p>
+  {% endif %}
+{% block content %}{% endblock %}
+</body>
+</html>
